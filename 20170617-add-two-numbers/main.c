@@ -11,6 +11,7 @@ struct ListNode* addTwoNumbers(struct ListNode *l1, struct ListNode *l2){
     }
     struct ListNode* head;
     struct ListNode* node;
+    struct ListNode* tmp;
 
     int result;
     int singleDigit = 0;
@@ -31,7 +32,6 @@ struct ListNode* addTwoNumbers(struct ListNode *l1, struct ListNode *l2){
         tensDigit = result / 10;
         singleDigit = result % 10;
     
-        struct ListNode* tmp;
         tmp = node;
         node = malloc(sizeof(struct ListNode));
         node->val = singleDigit;
@@ -41,7 +41,13 @@ struct ListNode* addTwoNumbers(struct ListNode *l1, struct ListNode *l2){
         l1 = l1->next;
         l2 = l2->next;
     }
-
+    if(tensDigit > 0){
+        tmp = node;
+        node = malloc(sizeof(struct ListNode));
+        node->val = tensDigit;
+        node->next = NULL;
+        tmp->next = node;
+    }
     return head;
 }
 
@@ -52,6 +58,7 @@ struct ListNode* prepareData(int* data, int size){
 
     struct ListNode* head;
     struct ListNode* node;
+    struct ListNode* tmp;
     int i;
 
     head = malloc(sizeof(struct ListNode));
@@ -60,7 +67,6 @@ struct ListNode* prepareData(int* data, int size){
     node = head;
     //之前将0号元素准备为头元素，下面从1循环
     for(i=1; i<size; i++){
-        struct ListNode* tmp;
         tmp = node;
         node = malloc(sizeof(struct ListNode));
         node->val = data[i];
@@ -90,7 +96,7 @@ int main()
 {
     //准备测试数据
     int data1[3] = {2, 4, 3};
-    int data2[3] = {5, 6, 4};
+    int data2[3] = {5, 6, 6};
     struct ListNode* l1 = prepareData(data1, 3);
     struct ListNode* l2 = prepareData(data2, 3);
 
