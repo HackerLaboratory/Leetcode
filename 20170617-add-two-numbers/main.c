@@ -27,8 +27,16 @@ struct ListNode* addTwoNumbers(struct ListNode *l1, struct ListNode *l2){
 
     l1 = l1->next;
     l2 = l2->next;
-    while((NULL != l1) && (NULL != l2)){
-        result = l1->val + l2->val + tensDigit;
+    while((NULL != l1) || (NULL != l2)){
+        result = tensDigit;
+        if(NULL != l1){
+            result = result + l1->val;
+            l1 = l1->next;
+        }
+        if(NULL != l2){
+            result = result + l2->val;
+            l2 = l2->next;
+        }
         tensDigit = result / 10;
         singleDigit = result % 10;
     
@@ -37,9 +45,6 @@ struct ListNode* addTwoNumbers(struct ListNode *l1, struct ListNode *l2){
         node->val = singleDigit;
         node->next = NULL;
         tmp->next = node;
-
-        l1 = l1->next;
-        l2 = l2->next;
     }
     if(tensDigit > 0){
         tmp = node;
@@ -96,9 +101,9 @@ int main()
 {
     //准备测试数据
     int data1[3] = {2, 4, 3};
-    int data2[3] = {5, 6, 6};
+    int data2[5] = {5, 6, 6, 4, 5};
     struct ListNode* l1 = prepareData(data1, 3);
-    struct ListNode* l2 = prepareData(data2, 3);
+    struct ListNode* l2 = prepareData(data2, 5);
 
     //计算和
     struct ListNode* ret = addTwoNumbers(l1, l2);
