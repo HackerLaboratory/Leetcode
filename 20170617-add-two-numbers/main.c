@@ -12,7 +12,6 @@ struct ListNode* addTwoNumbers(struct ListNode *l1, struct ListNode *l2){
     struct ListNode* head;
     struct ListNode* node;
     struct ListNode* tmp;
-
     int result;
     int singleDigit = 0;
     int tensDigit = 0;
