@@ -7,10 +7,12 @@ double findMedianSortedArray(int* nums, int numsSize){
     }
     if(numsSize % 2 == 0){
         int flag = numsSize / 2;
-        return (nums[flag] + nums[flag - 1]) / 2.0;
+        //如果有偶数个，并不返回真正的中位数，比如1、2、3、4，返回2
+        return nums[flag - 1];
     }
     else{
         int flag = numsSize / 2;
+        //如果有奇数个，则返回最中间的数
         return nums[flag];
     }
 }
