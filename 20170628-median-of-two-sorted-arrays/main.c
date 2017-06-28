@@ -1,7 +1,25 @@
 #include<stdio.h>
 
+//数组是从0开始索引的，不是从1开始索引的，靠，这个常识竟然忘了
+double findMedianSortedArray(int* nums, int numsSize){
+    if ((NULL == nums) || (0 == numsSize)){
+        return 0.0;
+    }
+    if(numsSize % 2 == 0){
+        int flag = numsSize / 2;
+        return (nums[flag] + nums[flag - 1]) / 2.0;
+    }
+    else{
+        int flag = numsSize / 2;
+        return nums[flag];
+    }
+}
+
 double findMedianSortedArrays(int* nums1, int nums1Size, int* nums2, int nums2Size){
-    
+    if (((NULL == nums1)  && (NULL == nums2)) 
+       || ((0 == nums1Size) && (0 == nums2Size))){
+        return 0.0;
+    }
     return 0.0;
 }
 
@@ -30,5 +48,6 @@ int main(){
     double real_2 = findMedianSortedArrays(testNums1_2, 9, testNums2_2, 5);
     compare(6.5, real_2, "测试用例2");
 
+    printf("\n");
     return 0;
 }
